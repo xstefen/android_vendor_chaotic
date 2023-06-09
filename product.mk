@@ -1,16 +1,33 @@
-# Default ADB shell prompt
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH)
+
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    persist.sys.adb.shell=/system_ext/bin/bash
+    persist.sys.adb.shell=/system_ext/bin/bash \
+    ro.com.google.clientidbase=android-google \
+    persist.sys.strictmode.disable=true \
+    ro.ota.allow_downgrade=true \
+    ro.storage_manager.enabled=true
 
-# Google Apps
-ifneq (,$(filter true,$(WITH_GAPPS) $(WITH_GMS)))
-  $(call inherit-product-if-exists, vendor/gapps/arm64/arm64-vendor.mk)
-  $(call inherit-product-if-exists, vendor/gms/products/gms.mk)
-  $(call inherit-product-if-exists, vendor/gcam/gcam-vendor.mk)
-endif
+PRODUCT_PACKAGES += \
+    adb_root \
+    bash \
+    iperf3 \
+    nano \
+    tinymix
 
-# iperf3
-PRODUCT_PACKAGES += iperf3
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
-# tinymix
-PRODUCT_PACKAGES += tinymix
+PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
+
+PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
+
+PRODUCT_RESTRICT_VENDOR_FILES := false
+
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    SystemUI
+
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    dalvik.vm.systemuicompilerfilter=speed
+
+$(call inherit-product, vendor/gms/products/gms.mk)
+$(call inherit-product, vendor/partner_modules/build/mainline_modules.mk)
