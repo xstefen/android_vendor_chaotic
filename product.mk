@@ -29,5 +29,5 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.systemuicompilerfilter=speed
 
-$(call inherit-product, vendor/gms/products/gms.mk)
 $(call inherit-product, vendor/partner_modules/build/mainline_modules.mk)
+$(call inherit-product, vendor/gms/products/gms.mk)
