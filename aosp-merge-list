@@ -1,0 +1,9 @@
+build/make [build]
+device/google/gs101
+device/google/gs201
+device/google/pantah
+-device/google/pantah-kernel
+hardware/google/pixel
+hardware/google/pixel-sepolicy
+-kernel/google/gs201 [kernel/gs]
+packages/apps/Settings
